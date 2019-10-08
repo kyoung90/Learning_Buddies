@@ -24,3 +24,8 @@
 .navlink-active {
   background-color: red;
 }
+
+.left {
+  float: left;
+  padding: 10px;
+}
