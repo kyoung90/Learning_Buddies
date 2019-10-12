@@ -1,29 +1,47 @@
-import React from "react";
-import logo from './logo.svg';
+ import React, { useState, useEffect } from "react";
 import './App.css';
 import userStore from './stores/userStore'
 import {useContext} from 'react'
+import { BrowserRouter as Router, Route, Link, NavLink, Switch } from "react-router-dom";
+
+import Home from './routes/Home'
+import Profile from './routes/Profile'
+import Matched from './routes/Matched'
+
 
 const App: React.FC = () => {
   const activityStore = useContext(userStore)
+  useEffect(() => {
+    activityStore.loadUser();
+  }, [activityStore])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>{activityStore.title}</h1>
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <nav>
+          <ul>
+            <li>
+              <NavLink exact activeClassName="navlink-active" to='/'>Home</NavLink>
+            </li>
+            <li>
+
+              <NavLink exact activeClassName="navlink-active" to='/profile'>Profile</NavLink>
+            </li>
+            <li>
+              <NavLink exact activeClassName="navlink-active" to='/matched'>Matched Users</NavLink>
+            </li>
+          </ul>
+        </nav>
+
+
+
+
+        <Switch>
+          <Route exact path='/' render={() => <Home />}/>
+          <Route exact path='/profile' component={Profile}/>
+          <Route exact path='/matched' component={Matched}/>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 

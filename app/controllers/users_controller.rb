@@ -1,16 +1,15 @@
 class UsersController < ApplicationController
     # before_action :authenticate_user!
-    
+
     def show
         @user = User.find_by(id: params[:id])
         if !@user
             render :json => {error: "User not found"}
-        end 
-        
+        end
+
         # if !user_signed_in?
         #     render :json => {error: "Must be logged in!"}
-        # end 
-
+        # end
         respond_to do |format|
             format.json  { render :json => @user, include: "**" }
         end
@@ -24,7 +23,7 @@ class UsersController < ApplicationController
         end
     end
 
-    def update 
+    def update
         user = User.find_by(id: params[:id])
         user.update(user_params)
 
@@ -40,7 +39,7 @@ class UsersController < ApplicationController
         respond_to do |format|
             format.json  { render :json => {Success: "Deleted Successfully"} }
         end
-    end 
+    end
 
     def user_params
         params.require(:user).permit(:name, :gender, :age, :bio, :skills => [])
