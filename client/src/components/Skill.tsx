@@ -13,10 +13,10 @@ const Skill = ({skillData}) => {
   }
   return (
     <div>
-      <p className='left'>Name: {skill.name}</p>
-      <br/>
+      <p>Name: {skill.name}</p>
       <p>Resources</p>
       {generateResources()}
+      <br/>
     </div>
   )
 }
