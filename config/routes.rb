@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :resources, only: [:show, :index]
   resources :skills, only: [:show, :index]
 
+  mount ActionCable.server, at: '/cable'
+
   devise_for :users,
   path: '',
   path_names: {

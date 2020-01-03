@@ -33,6 +33,16 @@ module LearningBuddies
       end
     end
 
+    # websocket
+config.action_cable.allowed_request_origins = [
+    # Local address of our RoR server
+    'http://localhost:3001',
+    # Local address we use for our React standalone client
+    'http://localhost:3000',
+    'chrome-extension://pfdhoblngboilpfeibdedpjgfnlcodoo'
+]
+ActionCable.server.config.disable_request_forgery_protection = true
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
