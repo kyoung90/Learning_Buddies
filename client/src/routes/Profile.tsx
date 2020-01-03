@@ -25,10 +25,11 @@ const Profile = () => {
         <h1>{user.name}</h1>
         <h4>{user.email}</h4>
         <p>{user.bio}</p>
-        <div className='left'>
+        <div>
 
 
             <p>Listed Skills</p>
+            <br/>
             {generateSkills()}
 
         </div>

@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  attr_accessor :token
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -10,7 +11,7 @@ class User < ApplicationRecord
   has_many :skills, -> { distinct }, through: :user_skills
 
   has_many :liked_users, class_name: 'LikedUser', foreign_key: :original_user_id
-  
+
   has_many :resources, -> { distinct }, through: :user_skills
 
   def matched_users
@@ -21,8 +22,8 @@ class User < ApplicationRecord
     Message.where("sender_id = ? OR receiver_id = ?", self.id, self.id)
   end
 
+
   def on_jwt_dispatch(token, payload)
-    byebug
-    this.token = token
+    self.token = "Bearer #{token}"
   end
 end
